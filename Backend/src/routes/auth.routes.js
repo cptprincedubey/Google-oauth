@@ -1,14 +1,18 @@
+
 const express = require("express");
 const passport = require("passport");
+
 const router = express.Router();
 
-router.get("/google",passport.authenticate("google", { scope: ["profile", "email"] })
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-router.get( 
+router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/api/auth/google/failed", 
+    failureRedirect: "/api/auth/google/failed",
   }),
   async (req, res) => {
     try {
@@ -22,7 +26,6 @@ router.get(
 
 router.get("/google/failed", (req, res) => {
   res.send("Tumse nahi ho paya");
-
 });
 
 
